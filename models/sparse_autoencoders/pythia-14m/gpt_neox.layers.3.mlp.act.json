@@ -1,0 +1,5 @@
+{
+    "input_size": 512,
+    "hidden_size": 2048,
+    "k": 20
+}
