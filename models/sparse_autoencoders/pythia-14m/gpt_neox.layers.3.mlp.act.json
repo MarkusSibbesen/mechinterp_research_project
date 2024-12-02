@@ -1,5 +1,9 @@
 {
     "input_size": 512,
     "hidden_size": 2048,
-    "k": 20
+    "k": 20,
+    "batch_size": 32,
+    "num_batches_trained_on": 1260,
+    "hookpoint": "gpt_neox.layers.3.mlp.act",
+    "learning_rate": 0.001
 }
