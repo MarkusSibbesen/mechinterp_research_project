@@ -79,6 +79,22 @@ def get_input_size(model, hookpoint):
     return input_size
 
 
+# def get_activations(text_batch, model, hookpoints, tokenizer, device):
+#     inputs = [
+#         tokenizer(text, return_tensors='pt').to(device)
+#         for text in text_batch
+#     ]
+
+#     activations = get_hidden_activations_multiple_hookpoints(model, hookpoints, inputs)
+
+#     return activations
+
+
+# def activation_generator(dataloader, model, hookpoints, tokenizer, device):
+#     for text_batch in tqdm.tqdm(dataloader):
+#         yield get_activations(text_batch, model, hookpoints, tokenizer, device)
+
+
 def get_activations_and_labels(text_batch, label_batch, model, hookpoints, tokenizer, device):
 
     inputs = [
