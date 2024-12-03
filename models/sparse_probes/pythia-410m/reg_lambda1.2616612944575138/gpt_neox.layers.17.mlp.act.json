@@ -1,0 +1,8 @@
+{
+    "batch_size": 32,
+    "num_batches_trained_on": 501,
+    "learning_rate": 0.001,
+    "input_size": 4096,
+    "reg_lambda": 1.2616612944575138,
+    "hookpoint": "gpt_neox.layers.17.mlp.act"
+}
