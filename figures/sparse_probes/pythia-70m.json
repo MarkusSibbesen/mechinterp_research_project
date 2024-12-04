@@ -1,0 +1,82 @@
+{
+    "1.2616612944575138": {
+        "gpt_neox.layers.0.mlp.act": 0.638820469379425,
+        "gpt_neox.layers.1.mlp.act": 0.609839141368866,
+        "gpt_neox.layers.2.mlp.act": 0.5940443277359009,
+        "gpt_neox.layers.3.mlp.act": 0.5584697723388672,
+        "gpt_neox.layers.4.mlp.act": 0.917475700378418,
+        "gpt_neox.layers.5.mlp.act": 0.9715982675552368
+    },
+    "0.18846716378431197": {
+        "gpt_neox.layers.0.mlp.act": 0.8529198169708252,
+        "gpt_neox.layers.1.mlp.act": 0.9729024767875671,
+        "gpt_neox.layers.2.mlp.act": 0.9758005738258362,
+        "gpt_neox.layers.3.mlp.act": 0.9810896515846252,
+        "gpt_neox.layers.4.mlp.act": 0.9700767993927002,
+        "gpt_neox.layers.5.mlp.act": 0.9823213815689087
+    },
+    "0.1": {
+        "gpt_neox.layers.0.mlp.act": 0.864222526550293,
+        "gpt_neox.layers.1.mlp.act": 0.9775394797325134,
+        "gpt_neox.layers.2.mlp.act": 0.9835530519485474,
+        "gpt_neox.layers.3.mlp.act": 0.9843500852584839,
+        "gpt_neox.layers.4.mlp.act": 0.9812345504760742,
+        "gpt_neox.layers.5.mlp.act": 0.9855093359947205
+    },
+    "0.6694329500821696": {
+        "gpt_neox.layers.0.mlp.act": 0.6183161735534668,
+        "gpt_neox.layers.1.mlp.act": 0.9449355006217957,
+        "gpt_neox.layers.2.mlp.act": 0.911896824836731,
+        "gpt_neox.layers.3.mlp.act": 0.9531951546669006,
+        "gpt_neox.layers.4.mlp.act": 0.9476886987686157,
+        "gpt_neox.layers.5.mlp.act": 0.9780466556549072
+    },
+    "29.999999999999996": {
+        "gpt_neox.layers.0.mlp.act": 0.5168091654777527,
+        "gpt_neox.layers.1.mlp.act": 0.47493115067481995,
+        "gpt_neox.layers.2.mlp.act": 0.4395739734172821,
+        "gpt_neox.layers.3.mlp.act": 0.5049268007278442,
+        "gpt_neox.layers.4.mlp.act": 0.8221272230148315,
+        "gpt_neox.layers.5.mlp.act": 0.569772481918335
+    },
+    "15.917892219322097": {
+        "gpt_neox.layers.0.mlp.act": 0.3925517797470093,
+        "gpt_neox.layers.1.mlp.act": 0.6290392279624939,
+        "gpt_neox.layers.2.mlp.act": 0.43377768993377686,
+        "gpt_neox.layers.3.mlp.act": 0.5061585307121277,
+        "gpt_neox.layers.4.mlp.act": 0.5578901171684265,
+        "gpt_neox.layers.5.mlp.act": 0.5578901171684265
+    },
+    "4.481404746557166": {
+        "gpt_neox.layers.0.mlp.act": 0.5956382751464844,
+        "gpt_neox.layers.1.mlp.act": 0.32821330428123474,
+        "gpt_neox.layers.2.mlp.act": 0.6138240694999695,
+        "gpt_neox.layers.3.mlp.act": 0.5578901171684265,
+        "gpt_neox.layers.4.mlp.act": 0.5578901171684265,
+        "gpt_neox.layers.5.mlp.act": 0.5578901171684265
+    },
+    "8.445976423531825": {
+        "gpt_neox.layers.0.mlp.act": 0.5667294263839722,
+        "gpt_neox.layers.1.mlp.act": 0.5918707251548767,
+        "gpt_neox.layers.2.mlp.act": 0.590928852558136,
+        "gpt_neox.layers.3.mlp.act": 0.5579625964164734,
+        "gpt_neox.layers.4.mlp.act": 0.5578901171684265,
+        "gpt_neox.layers.5.mlp.act": 0.5628169775009155
+    },
+    "2.377817258228513": {
+        "gpt_neox.layers.0.mlp.act": 0.6687436699867249,
+        "gpt_neox.layers.1.mlp.act": 0.7780031561851501,
+        "gpt_neox.layers.2.mlp.act": 0.6967105865478516,
+        "gpt_neox.layers.3.mlp.act": 0.5578901171684265,
+        "gpt_neox.layers.4.mlp.act": 0.5578901171684265,
+        "gpt_neox.layers.5.mlp.act": 0.8891464471817017
+    },
+    "0.3551987182490266": {
+        "gpt_neox.layers.0.mlp.act": 0.8491522669792175,
+        "gpt_neox.layers.1.mlp.act": 0.967903196811676,
+        "gpt_neox.layers.2.mlp.act": 0.9679756164550781,
+        "gpt_neox.layers.3.mlp.act": 0.9626140594482422,
+        "gpt_neox.layers.4.mlp.act": 0.9530502557754517,
+        "gpt_neox.layers.5.mlp.act": 0.9794232249259949
+    }
+}
