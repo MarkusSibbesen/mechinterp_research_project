@@ -10,6 +10,8 @@ class SAE_topk(nn.Module):
         hidden_size = meta_data["hidden_size"]
         self.k = meta_data['k']
 
+        self.pre_encode_b = nn.Parameter(torch.randn(hidden_size)*0.1)
+
         self.W = nn.Parameter(torch.randn(hidden_size, input_size) * 0.01)
         self.WT = nn.Parameter(torch.randn(input_size, hidden_size) * 0.01)
 
@@ -18,6 +20,9 @@ class SAE_topk(nn.Module):
         self.hidden_activations = None
 
     def forward(self, x):
+
+        x = x - self.pre_encode_b
+
         h = torch.topk(torch.matmul(x, self.WT) + self.b1, k=self.k, dim=-1)
         self.hidden_activations = h
         x_hat = einops.einsum(h.values, self.W[h.indices], 'token topk, token topk out -> token out') + self.b2
@@ -25,10 +30,16 @@ class SAE_topk(nn.Module):
         return x_hat
 
     def get_activations(self, x):
+
+        x = x - self.pre_encode_b
+
         h = torch.topk(torch.matmul(x, self.WT) + self.b1, k=self.k, dim=-1)
         self.hidden_activations = h
 
         return h
     
     def get_preacts(self, x):
+
+        x = x - self.pre_encode_b
+
         return torch.matmul(x, self.WT) + self.b1
