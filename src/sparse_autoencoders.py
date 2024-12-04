@@ -29,3 +29,6 @@ class SAE_topk(nn.Module):
         self.hidden_activations = h
 
         return h
+    
+    def get_preacts(self, x):
+        return torch.matmul(x, self.WT) + self.b1
