@@ -12,8 +12,11 @@ class SAE_topk(nn.Module):
 
         self.pre_encode_b = nn.Parameter(torch.randn(hidden_size)*0.1)
 
-        self.W = nn.Parameter(torch.randn(hidden_size, input_size) * 0.01)
-        self.WT = nn.Parameter(torch.randn(input_size, hidden_size) * 0.01)
+        initial_W = torch.randn(hidden_size, input_size) * 0.01
+        
+        with torch.no_grad():
+            self.W = nn.Parameter(initial_W.clone())
+            self.WT = nn.Parameter(initial_W.T.clone())
 
         self.b1 = nn.Parameter(torch.randn(hidden_size)*0.1)  # Bias for encoder
         self.b2 = nn.Parameter(torch.randn(input_size)*0.1)  # Bias for decoder
