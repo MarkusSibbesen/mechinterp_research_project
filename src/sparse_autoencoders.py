@@ -24,7 +24,7 @@ class SAE_topk(nn.Module):
 
     def forward(self, x):
 
-        x = x - self.pre_encode_b
+        # x = x - self.b2
 
         h = torch.topk(torch.matmul(x, self.WT) + self.b1, k=self.k, dim=-1)
         self.hidden_activations = h
@@ -34,7 +34,7 @@ class SAE_topk(nn.Module):
 
     def get_activations(self, x):
 
-        x = x - self.pre_encode_b
+        # x = x - self.b2
 
         h = torch.topk(torch.matmul(x, self.WT) + self.b1, k=self.k, dim=-1)
         self.hidden_activations = h
@@ -43,6 +43,6 @@ class SAE_topk(nn.Module):
     
     def get_preacts(self, x):
 
-        x = x - self.pre_encode_b
+        # x = x - self.b2
 
         return torch.matmul(x, self.WT) + self.b1
