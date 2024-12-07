@@ -21,7 +21,6 @@ class SAE_topk(nn.Module):
             self.W = nn.Parameter(initial_W.clone())
             self.WT = nn.Parameter(initial_W.T.clone())
 
-        
 
         self.b1 = nn.Parameter(torch.randn(hidden_size)*0.1)  # Bias for encoder
         self.b2 = nn.Parameter(torch.randn(input_size)*0.1)  # Bias for decoder
@@ -31,20 +30,27 @@ class SAE_topk(nn.Module):
         if self.meta_data["pre_encoder_bias"]:
             x = x - self.b2
 
-        if self.metadata["activation_function"] == "topk":
+        if self.meta_data["activation_function"] == "topk":
             h = torch.topk(torch.matmul(x, self.WT) + self.b1, k=self.k, dim=-1)
             self.hidden_activations = h
+            self.active_neurons = len(torch.unique(hiddens.indices))
             x_hat = einops.einsum(h.values, self.W[h.indices], 'token topk, token topk out -> token out') + self.b2
         else:
             h = torch.relu(torch.matmul(x, self.WT) + self.b1)
             self.hidden_activations = h 
+            
+
+#            acts = sae_trainers[0].model.hidden_activations
+            self.active_neurons = sum(h.sum(dim=0) > 0.001)
+            #self.active_neurons = torch.sum(h > 0).item()
+
             x_hat = torch.matmul(h, self.W) + self.b2
 
         return x_hat
 
     def get_activations(self, x):
         
-        if self.metadata["activation_function"] == "topk":
+        if self.meta_data["activation_function"] == "topk":
             h = torch.topk(torch.matmul(x, self.WT) + self.b1, k=self.k, dim=-1)
         else:
             h = torch.relu(torch.matmul(x, self.WT) + self.b1)
