@@ -33,7 +33,7 @@ class SAE_topk(nn.Module):
         if self.meta_data["activation_function"] == "topk":
             h = torch.topk(torch.matmul(x, self.WT) + self.b1, k=self.k, dim=-1)
             self.hidden_activations = h
-            self.active_neurons = len(torch.unique(hiddens.indices))
+            self.active_neurons = len(torch.unique(h.indices))
             x_hat = einops.einsum(h.values, self.W[h.indices], 'token topk, token topk out -> token out') + self.b2
         else:
             h = torch.relu(torch.matmul(x, self.WT) + self.b1)

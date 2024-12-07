@@ -1,0 +1,12 @@
+{
+    "input_size": 512,
+    "hidden_size": 2048,
+    "lambda_l1": 1,
+    "k": 45,
+    "activation_function": "relu",
+    "pre_encoder_bias": false,
+    "batch_size": 32,
+    "num_batches_trained_on": 2070,
+    "hookpoint": "gpt_neox.layers.3.mlp.act",
+    "learning_rate": 0.001
+}

@@ -1,0 +1,5 @@
+,lambda_l1,activation_function,pre_encoder_bias,loss,active_neurons
+0,,topk,True,0.004706575209274888,555.2
+1,,topk,False,0.00451371381059289,644.0
+2,1.0,relu,True,0.03717485554516316,2012.4
+3,1.0,relu,False,0.03767992109060288,2014.4
