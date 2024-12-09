@@ -38,7 +38,7 @@ class SAE_topk(SAE):
         if self.meta_data["pre_encoder_bias"]:
             x = x - self.pre_encode_b
 
-        h = torch.topk(torch.matmul(x, self.WT) + self.b1, k=self.k, dim=-1)
+        h = torch.topk(torch.matmul(x, self.WT) + self.b1, k=self.meta_data['k'], dim=-1)
         self.activations = h
         self.active_neurons = len(torch.unique(h.indices))
         x_hat = einops.einsum(h.values, self.W[h.indices], 'token topk, token topk out -> token out')
@@ -49,7 +49,7 @@ class SAE_topk(SAE):
         return x_hat
 
     def get_activations(self, x):
-        h = torch.topk(torch.matmul(x, self.WT) + self.b1, k=self.k, dim=-1)
+        h = torch.topk(torch.matmul(x, self.WT) + self.b1, k=self.meta_data['k'], dim=-1)
         return h
     
 
