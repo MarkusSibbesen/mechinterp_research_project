@@ -23,7 +23,7 @@ class SAE(nn.Module):
             self.WT = self.W.T
 
         if meta_data["pre_encoder_bias"]:
-            self.pre_encode_b = nn.Parameter(torch.randn(hidden_size)*0.1)
+            self.pre_encode_b = nn.Parameter(torch.randn(input_size)*0.1)
         self.b1 = nn.Parameter(torch.randn(hidden_size)*0.1)  # Bias for encoder
 
         self.activations = None
