@@ -20,7 +20,7 @@ class SAE(nn.Module):
                 self.WT = nn.Parameter(initial_W.T.clone())
         
         if self.meta_data['same_W']:
-            self.WT = self.W.T
+            self.WT = self.W.t()
 
         if meta_data["pre_encoder_bias"]:
             self.pre_encode_b = nn.Parameter(torch.randn(input_size)*0.1)
