@@ -1,0 +1,11 @@
+{
+    "input_size": 8192,
+    "hidden_size": 65536,
+    "k": 32,
+    "pre_encoder_bias": true,
+    "same_W": false,
+    "batch_size": 32,
+    "num_batches_trained_on": 2070,
+    "hookpoint": "gpt_neox.layers.16.mlp.act",
+    "learning_rate": 0.001
+}
