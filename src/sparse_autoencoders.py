@@ -16,7 +16,10 @@ class SAE(nn.Module):
         initial_W = torch.randn(hidden_size, input_size) * 0.01
         with torch.no_grad():
             self.W = nn.Parameter(initial_W.clone())
-            self.WT = nn.Parameter(initial_W.T.clone())
+            if self.meta_data['same_W']:
+                self.WT = self.W.T
+            else:
+                self.WT = nn.Parameter(initial_W.T.clone())
 
         if meta_data["pre_encoder_bias"]:
             self.pre_encode_b = nn.Parameter(torch.randn(hidden_size)*0.1)
