@@ -19,8 +19,6 @@ class SAE(nn.Module):
             if not self.meta_data['same_W']:
                 self.WT = nn.Parameter(initial_W.T.clone())
         
-        if self.meta_data['same_W']:
-            self.WT = self.W.t()
 
         if meta_data["pre_encoder_bias"]:
             self.pre_encode_b = nn.Parameter(torch.randn(input_size)*0.1)
@@ -32,7 +30,10 @@ class SAE(nn.Module):
         if self.meta_data["pre_encoder_bias"]:
             x = x - self.pre_encode_b
 
-        return torch.matmul(x, self.WT) + self.b1
+        if self.meta_data['same_W']:
+            return torch.matmul(x, self.W.t()) + self.b1
+        else:
+            return torch.matmul(x, self.WT) + self.b1
 
 
 
@@ -42,7 +43,10 @@ class SAE_topk(SAE):
         if self.meta_data["pre_encoder_bias"]:
             x = x - self.pre_encode_b
 
-        h = torch.topk(torch.matmul(x, self.WT) + self.b1, k=self.meta_data['k'], dim=-1)
+        if self.meta_data['same_W']:
+            h = torch.topk(torch.matmul(x, self.W.t()) + self.b1, k=self.meta_data['k'], dim=-1)
+        else:
+            h = torch.topk(torch.matmul(x, self.WT) + self.b1, k=self.meta_data['k'], dim=-1)
         self.activations = h
         self.active_neurons = len(torch.unique(h.indices))
         x_hat = einops.einsum(h.values, self.W[h.indices], 'token topk, token topk out -> token out')
@@ -53,7 +57,10 @@ class SAE_topk(SAE):
         return x_hat
 
     def get_activations(self, x):
-        h = torch.topk(torch.matmul(x, self.WT) + self.b1, k=self.meta_data['k'], dim=-1)
+        if self.meta_data['same_W']:
+            h = torch.topk(torch.matmul(x, self.W.t()) + self.b1, k=self.meta_data['k'], dim=-1)
+        else:
+            h = torch.topk(torch.matmul(x, self.WT) + self.b1, k=self.meta_data['k'], dim=-1)
         return h
     
 
@@ -65,7 +72,11 @@ class SAE_RELU(SAE):
         if self.meta_data["pre_encoder_bias"]:
             x = x - self.pre_encode_b
 
-        h = torch.relu(torch.matmul(x, self.WT) + self.b1)
+        if self.meta_data['same_W']:
+            h = torch.relu(torch.matmul(x, self.W.t()) + self.b1)
+        else:
+            h = torch.relu(torch.matmul(x, self.WT) + self.b1)
+
         self.activations = h
         self.active_neurons_per_batch = sum(h.sum(dim=0) > 0.001)
         #self.active_neurons = torch.sum(h > 0).item()
@@ -78,6 +89,9 @@ class SAE_RELU(SAE):
         return x_hat
     
     def get_activations(self, x):
-        h = torch.relu(torch.matmul(x, self.WT) + self.b1)
+        if self.meta_data['same_W']:
+            h = torch.relu(torch.matmul(x, self.W.t()) + self.b1)
+        else:
+            h = torch.relu(torch.matmul(x, self.WT) + self.b1)
         return h
 
