@@ -17,21 +17,21 @@ We measure the performance of the model both on next token prediction and a rang
 
 For each layer on each model, we train a probe $\sigma_\beta(\mathbf{x})$ on the internal activation vector $\mathbf{x}\in \mathbb{R}^n$. The probe is defined as:
 
-$$
+```math
 \sigma_\beta(\mathbf{x}) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + \dots + \beta_n x_n)}}
-$$
+```
 where $\beta_0$ is a bias, $\beta_ix_i$ is the probe's weight and the corresponding neuron activation from the original model. The probe is then trained by minimizing the expected binary cross-entropy loss
 
-$$
+```math
 \mathcal{L} = y \cdot\log(\sigma_\beta(\mathbf{x})) + (1-y)\cdot\log(1 -\sigma_\beta(\mathbf{x}))
-$$
+```
 where $y \in \{0, 1\}$ is the ground truth for the language ($0=Danish, 1=English$)
 
 We limit the flexibility of our probes by adding an L2 regularisation term to the loss function:
 
-$$
+```math
 L_2 = \lambda \cdot \sqrt{ \sum_{i=0}^n \beta_i^2}
-$$
+```
 where $\lambda$ is hyperparameter that sets the strength of the regularization.
 
 
@@ -43,10 +43,10 @@ We ensure sparsity in the hidden layer directly, by using a $topk$ activation fu
 
 
 The SAE is then trained by minimizing the expected mean square error (MSE) reconstruction loss 
-$$
+```math
 \mathcal{L} = ||\mathbf{x} - \hat{\mathbf{x}}||_2^2,\quad
 \hat{\mathbf{x}} = W_d\mathrm{topk}(W_e\mathbf{(x - \textbf{b}_p}) + \mathbf{b}_e) + \mathbf{b}_p
-$$
+```
 
 
 ### Results
