@@ -44,7 +44,7 @@ We ensure sparsity in the hidden layer directly, by using a $topk$ activation fu
 
 The SAE is then trained by minimizing the expected mean square error (MSE) reconstruction loss 
 ```math
-\mathcal{L} = ||\textbf{x} - \hat{\textbf{x}}||_2^2,\quad
+\mathcal{L} =  \lVert\textbf{x} - \hat{\textbf{x}}\rVert_2^2,\quad
 \hat{\textbf{x}} = W_d\mathrm{topk}(W_e(\textbf{x} - \textbf{b}_p) + \textbf{b}_e) + \textbf{b}_p
 ```
 
