@@ -48,6 +48,8 @@ The SAE is then trained by minimizing the expected mean square error (MSE) recon
 \hat{\textbf{x}} = W_d\mathrm{topk}(W_e(\textbf{x} - \textbf{b}_p) + \textbf{b}_e) + \textbf{b}_p
 ```
 
+We train an SAE on layer 16 of pythia-1.4b, 'with an expansion factor of 8, meaning we have 8192 input neurons and 65536 hidden neurons. We set $k=32$. We train on the NeuLab-TedTalks datasets using an A100 on Google Colab.
+
 
 ### Results
 
@@ -62,6 +64,35 @@ We find that with low regularization factors, the probes achieve high accuracy o
 Qualitatively, the most noticeable single layer rise occurs on layer 16 of pythia-1.4b, which achieves upwards of $90\%$ accuracy even with high regularization factors, notably higher than the layers immediately before *and* after. We therefore chose to focus on training our SAE on the activations from this layer.
 
 #### Sparse Autoencoder
+
+![Preactivation of danish neurons](figures/sae_neuron_activations/neuron_preacts.png)
+
+*Pre-activation levels of 6 SAE latent neurons which have higher activation levels in Danish than Dnglish*
+
+On the test set of NeuLab-TedTalks, we identify 6 neurons, which are active on more than 50\% of tokens in the Danish sentences, but less than 1\% of tokens in the English sentences.
+
+We plot their pre-activations (their values before the topK activation function) and observe that for all of them, their pre-activations are (expectedly) significantly higher on Danish tokens than English. In particular, neuron 26335 shows remarkably little overlap between the two languages.
+
+
+![Preactivation of neuron 26335 on a sample of Danish text](figures/sae_neuron_activations/preacts_da_newer.png)
+
+*Preactivation of neuron 26335 on a sample of Danish text*
+
+![Preactivation of neuron 26335 on a sample of English text](figures/sae_neuron_activations/preacts_en_newer.png)
+
+*Preactivation of neuron 26335 on a sample of English text*
+
+We wanted to illustrate how the neuron behaved on sample Danish and English text, so we computed its pre-activation on a sample of Danish and English parallel text.
+
+
+
+![Next Token Prediction results](figures/downstream_tasks/next_token_pred.png)
+
+*Results for next token prediction as we vary the activation of Danish latents*
+
+To test the effect of the Danish neurons on the model, we measure the model's performance as we vary their activations. This is done by inserting our trained SAE on layer 16 of the model, replacing the output with our reconstruction. Now we can manually set the values of particular SAE latents and observe the effect on the model output.
+
+We measure the cross-entropy loss for next token prediction on the Danish and English parts of the parallel ELRC\_2923 dataset, respectively, as we fix the activation of the 6 neurons at different levels. We find that lowering the value has an outsized negative influence on performance on Danish text in particular, compared with English text, suggesting that the neurons are causally relevant for Danish performance.
 
 
 
