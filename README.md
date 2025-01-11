@@ -15,15 +15,15 @@ We measure the performance of the model both on next token prediction and a rang
 
 #### Classification Probes
 
-For each layer on each model, we train a probe $\sigma_\beta(\mathbf{x})$ on the internal activation vector $\mathbf{x}\in \mathbb{R}^n$. The probe is defined as:
+For each layer on each model, we train a probe $\sigma_\beta(\textbf{x})$ on the internal activation vector $\textbf{x}\in \mathbb{R}^n$. The probe is defined as:
 
 ```math
-\sigma_\beta(\mathbf{x}) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + \dots + \beta_n x_n)}}
+\sigma_\beta(\textbf{x}) = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + \dots + \beta_n x_n)}}
 ```
 where $\beta_0$ is a bias, $\beta_ix_i$ is the probe's weight and the corresponding neuron activation from the original model. The probe is then trained by minimizing the expected binary cross-entropy loss
 
 ```math
-\mathcal{L} = y \cdot\log(\sigma_\beta(\mathbf{x})) + (1-y)\cdot\log(1 -\sigma_\beta(\mathbf{x}))
+\mathcal{L} = y \cdot\log(\sigma_\beta(\textbf{x})) + (1-y)\cdot\log(1 -\sigma_\beta(\textbf{x}))
 ```
 where $y \in \{0, 1\}$ is the ground truth for the language ($0=Danish, 1=English$)
 
@@ -37,15 +37,15 @@ where $\lambda$ is hyperparameter that sets the strength of the regularization.
 
 #### Sparse Autoencoders
 
-Our Sparse Autoencoder (SAE) consists of an encoding weight matrix $W_e \in \mathbb{R}^{m \times n}$, a decoding weight matrix $W_d \in \mathbb{R}^{n \times m}$ and an encoding bias $\mathbf{b}_e \in \mathbb{R}^m$. Additionally, we use a pre-encoder bias $\mathbf{b}_p \in \mathbb{R}^n$, which we subtract before encoding and then re-add after decoding. 
+Our Sparse Autoencoder (SAE) consists of an encoding weight matrix $W_e \in \mathbb{R}^{m \times n}$, a decoding weight matrix $W_d \in \mathbb{R}^{n \times m}$ and an encoding bias $\textbf{b}_e \in \mathbb{R}^m$. Additionally, we use a pre-encoder bias $\textbf{b}_p \in \mathbb{R}^n$, which we subtract before encoding and then re-add after decoding. 
 
 We ensure sparsity in the hidden layer directly, by using a $topk$ activation function, which restricts the latent representation to only the $k$ highest activations, setting the rest to zero. 
 
 
 The SAE is then trained by minimizing the expected mean square error (MSE) reconstruction loss 
 ```math
-\mathcal{L} = ||\mathbf{x} - \hat{\mathbf{x}}||_2^2,\quad
-\hat{\mathbf{x}} = W_d\mathrm{topk}(W_e\mathbf{(x - \textbf{b}_p}) + \mathbf{b}_e) + \mathbf{b}_p
+\mathcal{L} = ||\textbf{x} - \hat{\textbf{x}}||_2^2,\quad
+\hat{\textbf{x}} = W_d\mathrm{topk}(W_e(\textbf{x} - \textbf{b}_p) + \textbf{b}_e) + \textbf{b}_p
 ```
 
 
